@@ -1,0 +1,2 @@
+#!/bin/bash
+PATH=/opt/ibm/clang-ykt/bin:/usr/local/cuda/bin:$PATH LD_LIBRARY_PATH=/opt/ibm/clang-ykt/lib:/usr/local/cuda/lib64:$LD_LIBRARY_PATH LIBRARY_PATH=/opt/ibm/clang-ykt/lib:/usr/local/cuda/lib64:$LIBRARY_PATH /opt/ibm/clang-ykt/bin/clang -O3 laplace2d.c -I../common -L /usr/lib/gcc/x86_64-linux-gnu/5 -L/opt/ibm/sources/llvm/projects/openmp/build/lib -lomp -std=c99 -lm -Wall -DTRACE -D_BSD_SOURCE -g -O0 -fopenmp -omptargets=nvptx64sm_35-nvidia-linux -o laplace_clang_ibm

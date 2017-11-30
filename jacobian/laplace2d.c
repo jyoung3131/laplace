@@ -60,9 +60,9 @@ int main(int argc, char** argv)
         Anew[i] = (float *)malloc(n*sizeof(float));
 
     float* y0 = malloc(n*sizeof(float));
-
-    memset(A, 0, n * m * sizeof(float));
 */
+    memset(A, 0, n * m * sizeof(float));
+
 
     // set boundary conditions
     for (int i = 0; i < m; i++)
@@ -83,13 +83,13 @@ int main(int argc, char** argv)
     StartTimer();
     int iter = 0;
     
-#pragma omp parallel for shared(Anew)
+//#pragma omp parallel for shared(Anew)
     for (int i = 1; i < m; i++)
     {
        Anew[0][i]   = 0.f;
        Anew[n-1][i] = 0.f;
     }
-#pragma omp parallel for shared(Anew)    
+//#pragma omp parallel for shared(Anew)    
     for (int j = 1; j < n; j++)
     {
         Anew[j][0]   = y0[j];
@@ -98,10 +98,11 @@ int main(int argc, char** argv)
     
     while ( error > tol && iter < iter_max )
     {
-        error = 0.f;
+       error = 0.f;
 #pragma omp target
 {
-#pragma omp parallel for shared(m, n, Anew, A)
+//#pragma omp parallel for shared(m, n, Anew, A)
+#pragma omp parallel for
         for( int j = 1; j < n-1; j++)
         {
             for( int i = 1; i < m-1; i++ )
@@ -112,7 +113,8 @@ int main(int argc, char** argv)
             }
         }
         
-#pragma omp parallel for shared(m, n, Anew, A)
+//#pragma omp parallel for shared(m, n, Anew, A)
+#pragma omp parallel for
         for( int j = 1; j < n-1; j++)
         {
             for( int i = 1; i < m-1; i++ )
@@ -120,7 +122,7 @@ int main(int argc, char** argv)
                 A[j][i] = Anew[j][i];    
             }
         }
-}
+} //End of target region
         if(iter % 100 == 0) printf("%5d, %0.6f\n", iter, error);
         
         iter++;
