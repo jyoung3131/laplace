@@ -1,5 +1,5 @@
 # laplace
-Compilation steps were separated out to help debugging. All compilation files are in the /jacobian folder. /common contains the timer. Each compilation step is contained in step1.sh, step2.sh, step3.sh, step4.sh, and step5.sh. 
+Compilation steps were separated out to help debugging. All compilation files are in the /jacobian folder. /common contains the timer. Each compilation step is contained in step1.sh, step2.sh, step3.sh, step4.sh, and step5.sh. Use ./nvlink_wrapper.sh to run all 5 steps.
 
 # step1.sh
 step1.sh produces the laplace2d-d44720.bc file
