@@ -1,3 +1,0 @@
-/home/nikhil/gpu_test/jacobian/CMakeFiles/edit_cache.dir
-/home/nikhil/gpu_test/jacobian/CMakeFiles/laplace_cmake.dir
-/home/nikhil/gpu_test/jacobian/CMakeFiles/rebuild_cache.dir
